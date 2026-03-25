@@ -4,7 +4,6 @@ from models import Base
 from container import container
 from config import settings
 import logging
-import redis.asyncio as redis
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 logging.basicConfig(level=logging.INFO)

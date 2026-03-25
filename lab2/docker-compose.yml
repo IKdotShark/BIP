@@ -6,3 +6,22 @@ services:
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/notes.db
+    volumes:
+      - ./app:/app
+      - ./app/notes.db:/app/notes.db
+
+volumes:
+  redis_data:
